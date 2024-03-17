@@ -13,7 +13,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
             .sort({ metacritic: -1 })
             .limit(10)
             .toArray();
-       return NextResponse.json(movies);
+        return NextResponse.json(movies);
     } catch (e) {
         console.error(e);
         return NextResponse.error();
