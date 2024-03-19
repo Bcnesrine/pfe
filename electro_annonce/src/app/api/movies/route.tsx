@@ -1,4 +1,4 @@
-import clientPromise from '@/app/lib/db';
+import clientPromise from '@/app/lib/mango_db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from 'next/server';
 
