@@ -1,21 +1,22 @@
-import clientPromise from '@/app/lib/mango_db';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from 'next/server';
+// pages/api/users.js
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+import { connectDB } from '../../lib/mango_db';
+import UserModel from '../../models/users';
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    console.log("hello");
+    if (req.method !== 'GET') {
+        return res.status(405).json({ message: 'Method Not Allowed' });
+    }
+
+    await connectDB();
 
     try {
-        const client = await clientPromise;
-        const db = client.db("pfe");
-        const movies = await db
-            .collection("user")
-            .find({})
-            .sort({ metacritic: -1 })
-            .limit(10)
-            .toArray();
-        return NextResponse.json(movies);
-    } catch (e) {
-        console.error(e);
-        return NextResponse.error();
+        const users = await UserModel.find({});
+        return res.status(200).json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
     }
 }
