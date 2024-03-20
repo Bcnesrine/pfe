@@ -18,18 +18,20 @@ export async function connectDB() {
 
 async function createUserModelIfNotExists() {
   try {
+    await mongoose.connect(MONGODB_URI!);
+    console.log('Connected to MongoDB 2 !');
     // Vérifier si la collection existe déjà
     const collections = await mongoose.connection.db.collections();
     const collectionExists = collections.some(collection => collection.collectionName === 'pfe');
 
     // Si la collection n'existe pas, créer le modèle et la collection
     if (!collectionExists) {
-      console.log('Creating "users" collection');
-      await mongoose.connection.db.createCollection('users');
-      console.log('Created "users" collection');
+      console.log('Creating "pfe" collection');
+      await mongoose.connection.db.createCollection('pfe');
+      console.log('Created "pfe" collection');
     }
   } catch (error) {
-    console.error('Error creating user collection:', error);
+    console.error('Error creating pfe collection:', error);
   }
 }
 
