@@ -14,6 +14,6 @@ const coordinateSchema: Schema = new Schema({
     emails: [{ type: String }]
 });
 
-const Coordinate: Model<ICoordinate> = mongoose.model<ICoordinate>('Coordinate', coordinateSchema);
+const CoordinateModel = mongoose.models.coordinate || mongoose.model<ICoordinate>('coordinate', coordinateSchema);
 
-export default Coordinate;
+export default CoordinateModel;

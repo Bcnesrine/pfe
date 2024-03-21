@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface ICategory extends Document {
     category_id: string;
@@ -14,6 +14,6 @@ const categorySchema: Schema = new Schema({
     images: [{ type: String }] // URLs or references to images
 });
 
-const Category: Model<ICategory> = mongoose.model<ICategory>('Category', categorySchema);
+const CategoryModel = mongoose.models.category || mongoose.model<ICategory>('category', categorySchema);
 
-export default Category;
+export default CategoryModel;

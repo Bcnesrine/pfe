@@ -1,12 +1,16 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { connectDB } from '../../lib/mango_db';
+import AnnonceModel from '../../models/annonce';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function get(req: NextApiRequest, res: NextApiResponse) {
+
+
+export async function GET(req: NextRequest, res: NextResponse) {
+    await connectDB();
     try {
-        // Logique pour la méthode GET
-        res.status(200).json({ message: 'GET request handled!' });
+        const annonce = await AnnonceModel.find({});
+        return NextResponse.json(annonce);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        console.error('Error fetching users:', error);
+        return NextResponse.error();
     }
 }
-

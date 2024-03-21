@@ -14,6 +14,6 @@ const commentSchema: Schema = new Schema({
     date: { type: Date, default: Date.now }
 });
 
-const Comment: Model<IComment> = mongoose.model<IComment>('Comment', commentSchema);
+const CommentModel = mongoose.models.comment || mongoose.model<IComment>('comment', commentSchema);
 
-export default Comment;
+export default CommentModel;

@@ -14,6 +14,6 @@ const criteriaSchema: Schema = new Schema({
     brand: { type: String, required: true }
 });
 
-const Criteria: Model<ICriteria> = mongoose.model<ICriteria>('Criteria', criteriaSchema);
+const CriteriaModel = mongoose.models.criteria || mongoose.model<ICriteria>('criteria', criteriaSchema);
 
-export default Criteria;
+export default CriteriaModel;
