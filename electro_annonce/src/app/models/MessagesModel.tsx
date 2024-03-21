@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IMessage extends Document {
   date: Date;
@@ -21,15 +21,10 @@ const messageSchema: Schema = new Schema({
   }
 });
 
-let Message: Model<IMessage>;
+const MessageModel = mongoose.models.Message || mongoose.model<IMessage>('Message', messageSchema);
 
-try {
-  // Essaie de récupérer le modèle Message
-  Message = mongoose.model<IMessage>('Message');
-} catch (error) {
-  // Si le modèle n'existe pas encore, le définit
-  Message = mongoose.model<IMessage>('Message', messageSchema);
-}
+export default MessageModel;
 
-export default Message;
+
+
 
