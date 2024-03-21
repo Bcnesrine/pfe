@@ -14,6 +14,6 @@ const forumSchema: Schema = new Schema({
     messages: [{ type: String }]
 });
 
-const Forum: Model<IForum> = mongoose.model<IForum>('Forum', forumSchema);
+const ForumModel = mongoose.models.forum || mongoose.model<IForum>('forum', forumSchema);
 
-export default Forum;
+export default ForumModel;

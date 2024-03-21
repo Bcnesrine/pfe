@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Model } from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 
 // Interface représentant un document d'annonce
 interface AnnonceDocument extends Document {
@@ -26,16 +26,11 @@ const annonceSchema = new Schema<AnnonceDocument>({
     images: [{ type: String }] // URLs ou références aux images
 });
 
-// Vérifie si le modèle Annonce existe déjà
-let AnnonceModel: Model<AnnonceDocument>;
 
-try {
-    // Essaie de récupérer le modèle Annonce
-    AnnonceModel = mongoose.model<AnnonceDocument>('Annonce');
-} catch (error) {
-    // Si le modèle n'existe pas encore, le définit
-    AnnonceModel = mongoose.model<AnnonceDocument>('Annonce', annonceSchema);
-}
+
+const AnnonceModel = mongoose.models.annonce || mongoose.model<AnnonceDocument>('annonce', annonceSchema);
+
+
 
 export default AnnonceModel;
 

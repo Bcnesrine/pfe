@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document, Model, Types } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IBrand extends Document {
     brand_id: string;
@@ -12,6 +12,8 @@ const brandSchema: Schema = new Schema({
     image: { type: String, required: true }
 });
 
-const Brand: Model<IBrand> = mongoose.model<IBrand>('Brand', brandSchema);
+const BrandModel = mongoose.models.brands || mongoose.model<IBrand>('brands', brandSchema);
 
-export default Brand;
+
+
+export default BrandModel;
