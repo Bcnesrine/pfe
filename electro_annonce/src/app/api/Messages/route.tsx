@@ -9,8 +9,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(req: NextRequest, res: NextResponse) {
     await connectDB();
     try {
-        const users = await MessageModel.find({});
-        return NextResponse.json(MessageModel);
+        const messages = await MessageModel.find({});
+        return NextResponse.json(messages);
     } catch (error) {
         console.error('Error fetching users:', error);
         return NextResponse.error();
