@@ -14,3 +14,18 @@ export async function GET(req: NextRequest, res: NextResponse) {
         return NextResponse.error();
     }
 }
+export async function POST(req: NextRequest, res: NextResponse) {
+    try {
+        await connectDB();
+
+        const coordinateData = await req.json();
+        const newCoordinate = new CoordinatModel(coordinateData);
+
+        await newCoordinate.save();
+
+        return new NextResponse(JSON.stringify({ message: 'Coordonnées ajoutées avec succès', coordinate: newCoordinate }), { status: 201 });
+    } catch (error) {
+        console.error('Erreur lors de l\'ajout des coordonnées :', error);
+        return new NextResponse(JSON.stringify({ message: 'Erreur lors de l\'ajout des coordonnées. Veuillez réessayer.' }), { status: 500 });
+    }
+}
